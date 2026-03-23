@@ -51,7 +51,13 @@ export function SiteFooter() {
           </div>
         ))}
 
-        <div className="footer-col">
+        <div className="footer-col footer-col--phone">
+          <p className="footer-tel">
+            <a href="tel:0653490089">📞 06 534 900 89</a>
+          </p>
+        </div>
+
+        <div className="footer-col footer-col--social">
           <h4 className="footer-col-heading">Volg Ons</h4>
           <div className="footer-social">
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"

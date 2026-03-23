@@ -32,32 +32,10 @@ export function OffertePage() {
 
       <Section eyebrow="Formulier" title="Offerteformulier" variant="light">
         <form className="offer-form" onSubmit={handleSubmit}>
-          <div className="form-row">
-            <FormField label="Naam" name="name" type="text" required />
-            <FormField label="Telefoon *" name="phone" type="tel" required />
-          </div>
-          <div className="form-row">
-            <FormField label="E-mailadres *" name="email" type="email" required />
-            <FormField label="Adres" name="street" type="text" />
-          </div>
-          <div className="form-row">
-            <FormField label="Woonplaats" name="city" type="text" />
-            <FormField label="Postcode" name="postal" type="text" />
-          </div>
-          <div className="form-row">
-            <FormField label="Type woning/pand" name="propertyType" type="text" />
-            <FormField label="Wat mag er gebeuren?" name="scope" type="text" />
-          </div>
-          <FormField label="Gewenste startperiode" name="startPeriod" type="text" fullWidth />
-          <FormField label="Bericht" name="message" multiline rows={5} fullWidth />
-          <FormField
-            label="Optioneel: foto's uploaden"
-            name="photos"
-            type="file"
-            multiple
-            fullWidth
-            hint="Upload foto's voor een nauwkeurigere prijsindicatie."
-          />
+          <FormField label="Naam" name="name" type="text" fullWidth required />
+          <FormField label="Telefoon *" name="phone" type="tel" fullWidth required />
+          <FormField label="E-mailadres *" name="email" type="email" fullWidth required />
+          <FormField label="Bericht" name="message" multiline rows={5} fullWidth required />
           <div className="form-submit">
             <Button type="submit" variant="primary" size="lg">
               Vraag de vrijblijvende offerte aan

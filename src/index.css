@@ -279,7 +279,7 @@ img, svg { display: block; max-width: 100%; }
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(12px);
   box-shadow: var(--shadow-sm);
-  min-height: 104px;
+  min-height: 88px;
 }
 
 .topbar-inner {
@@ -287,7 +287,7 @@ img, svg { display: block; max-width: 100%; }
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  min-height: 104px;
+  min-height: 88px;
 }
 
 .brand-mark {
@@ -298,8 +298,8 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .brand-logo {
-  width: 104px;
-  height: 104px;
+  width: 84px;
+  height: 84px;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -327,6 +327,56 @@ img, svg { display: block; max-width: 100%; }
   display: flex;
   align-items: center;
   gap: 0.3rem;
+}
+
+.topbar-nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.topbar-nav-mobile {
+  display: none;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.diensten-dropdown {
+  position: relative;
+}
+
+.diensten-summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.diensten-summary::-webkit-details-marker {
+  display: none;
+}
+
+.diensten-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  left: 0;
+  z-index: 140;
+  min-width: 190px;
+  padding: 0.35rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-md);
+  display: grid;
+  gap: 0.2rem;
+}
+
+.diensten-dropdown:not([open]) .diensten-dropdown-menu {
+  display: none;
+}
+
+.diensten-dropdown-link {
+  display: block;
+  font-size: 1rem;
+  padding: 0.62rem 0.8rem;
 }
 
 .nav-link {
@@ -779,7 +829,11 @@ img, svg { display: block; max-width: 100%; }
    REVIEWS
 ══════════════════════════════════════════════════════ */
 
-.review-grid {
+.review-carousel {
+  overflow: visible;
+}
+
+.review-carousel-track {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25rem;
@@ -801,6 +855,10 @@ img, svg { display: block; max-width: 100%; }
   flex-direction: column;
   justify-content: space-between;
   min-height: 210px;
+}
+
+.review-card.review-card--clone {
+  display: none;
 }
 
 .review-card-text {
@@ -939,6 +997,16 @@ img, svg { display: block; max-width: 100%; }
   padding: 0.4rem 0;
 }
 
+.cta-block .btn {
+  max-width: 100%;
+  white-space: normal;
+}
+
+.cta-block .btn--lg {
+  padding: 0.7rem 1.35rem;
+  font-size: 0.94rem;
+}
+
 .cta-heading {
   font-size: clamp(1.8rem, 3.5vw, 2.8rem);
   font-weight: 900;
@@ -1052,6 +1120,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .footer-col              { display: flex; flex-direction: column; gap: 0.7rem; }
+.footer-col--phone       { display: none; }
 
 .footer-col-heading {
   font-size: 0.78rem;
@@ -1101,11 +1170,35 @@ img, svg { display: block; max-width: 100%; }
 ══════════════════════════════════════════════════════ */
 
 @media (max-width: 860px) {
-  .topbar-inner   { min-height: 70px; flex-wrap: wrap; }
-  .brand-logo     { width: 52px; height: 52px; }
+  .topbar         { min-height: 66px; }
+  .topbar-inner   { min-height: 66px; flex-wrap: nowrap; gap: 0.45rem; }
+  .brand-logo     { width: 44px; height: 44px; }
   .brand-tagline  { display: none; }
-  .topbar-nav     { gap: 0.1rem; flex-wrap: wrap; }
-  .nav-link       { font-size: 0.82rem; padding: 0.38rem 0.6rem; }
+  .topbar-nav     { margin-left: auto; }
+  .topbar-nav-desktop { display: none; }
+  .topbar-nav-mobile  { display: flex; gap: 0.22rem; }
+  .topbar-nav-mobile .nav-link {
+    font-size: 0.76rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .topbar-nav-mobile .diensten-dropdown-link {
+    font-size: 1rem;
+    padding: 0.62rem 0.8rem;
+  }
+  .topbar-offerte-btn.btn--sm {
+    padding: 0.34rem 0.62rem;
+    font-size: 0.76rem;
+  }
+  .diensten-dropdown-menu {
+    left: auto;
+    right: 0;
+    min-width: 170px;
+  }
+  .diensten-dropdown-link {
+    font-size: 1rem;
+    padding: 0.62rem 0.8rem;
+  }
 
   .hero           { padding: var(--space-8) 0 var(--space-6); }
   .hero--photo    {
@@ -1117,18 +1210,87 @@ img, svg { display: block; max-width: 100%; }
   .hero-title     { font-size: clamp(2rem, 7vw, 3.2rem); }
   .hero-lead      { font-size: clamp(1rem, 2.9vw, 1.25rem); }
 
-  .card-grid,
-  .review-grid    { grid-template-columns: 1fr; }
+  .card-grid      { grid-template-columns: 1fr; }
   .about-split    { grid-template-columns: 1fr; }
   .stats-grid     { grid-template-columns: repeat(2, 1fr); }
   .step-grid      { grid-template-columns: repeat(2, 1fr); }
   .form-row       { grid-template-columns: 1fr; }
 
+  .review-carousel {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  }
+
+  .review-carousel-track {
+    display: flex;
+    align-items: stretch;
+    gap: 0.9rem;
+    width: max-content;
+    animation: review-carousel-scroll 32s linear infinite;
+    max-width: none;
+    margin: 0;
+  }
+
+  .review-card,
+  .review-card--clone {
+    display: flex;
+    width: 280px;
+    min-height: 220px;
+  }
+
+  .review-card.review-card--clone {
+    display: flex;
+  }
+
   .work-carousel-item--sm { width: 170px; }
   .work-carousel-item--md { width: 240px; }
   .work-carousel-item--lg { width: 320px; }
 
-  .footer-inner   { grid-template-columns: 1fr; }
+  .footer-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer-brand {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    align-items: start;
+    column-gap: 0.9rem;
+    row-gap: 0.6rem;
+  }
+
+  .footer-brand > a {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .footer-logo {
+    width: 100%;
+    max-width: 84px;
+  }
+
+  .footer-tagline {
+    grid-column: 2;
+  }
+
+  .footer-brand .footer-tel {
+    display: none;
+  }
+
+  .footer-col--phone {
+    display: flex;
+    grid-column: 1;
+  }
+
+  .footer-col--social {
+    grid-column: 2;
+  }
+
+  .footer-col--phone .footer-tel { margin: 0; }
 
   .cta-section {
     padding-top: 1.5rem;
@@ -1151,6 +1313,11 @@ img, svg { display: block; max-width: 100%; }
   .portfolio-tile--tall {
     grid-column: span 1;
   }
+}
+
+@keyframes review-carousel-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 0.45rem)); }
 }
 
 @media (max-width: 560px) {

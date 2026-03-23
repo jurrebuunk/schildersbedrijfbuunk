@@ -7,6 +7,7 @@ import { reviews, services } from '../data/siteContent'
 
 const cardAccents = ['pink', 'cyan', 'navy', 'orange', 'pink', 'cyan'] as const
 const workSkeletons = ['work-carousel-item--lg', 'work-carousel-item--md', 'work-carousel-item--sm', 'work-carousel-item--md', 'work-carousel-item--lg'] as const
+const reviewCarousel = [...reviews, ...reviews]
 
 export function HomePage() {
   return (
@@ -80,13 +81,15 @@ export function HomePage() {
 
       {/* ── Reviews ── */}
       <Section eyebrow="Klantbeoordelingen" title="Wat klanten over ons zeggen" variant="cyan-wash" align="center">
-        <div className="review-grid">
-          {reviews.map((review) => (
-            <blockquote key={review} className="review-card">
-              <p className="review-card-text">{review.replace(/^★+\s*/, '')}</p>
-              <div className="review-stars" aria-label="5 van 5 sterren">★★★★★</div>
-            </blockquote>
-          ))}
+        <div className="review-carousel">
+          <div className="review-carousel-track">
+            {reviewCarousel.map((review, index) => (
+              <blockquote key={`${review}-${index}`} className={`review-card${index >= reviews.length ? ' review-card--clone' : ''}`}>
+                <p className="review-card-text">{review.replace(/^★+\s*/, '')}</p>
+                <div className="review-stars" aria-label="5 van 5 sterren">★★★★★</div>
+              </blockquote>
+            ))}
+          </div>
         </div>
       </Section>
 
