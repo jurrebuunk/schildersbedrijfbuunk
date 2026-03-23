@@ -1,10 +1,26 @@
 import { NavLink } from 'react-router-dom'
 import logo from '../assets/branding/buunk-logo.png'
 
-const footerLinks = {
-  Diensten: ['Home', 'Over Ons', 'Schilderwerken', 'Portfolio', 'Contact'],
-  Klantenservice: ['Algemene Voorwaarden', 'Onderhoud & Service', 'Privacybeleid'],
-}
+const footerLinks = [
+  {
+    heading: 'Diensten',
+    links: [
+      { label: 'Schilderwerken', to: '/schilderwerken' },
+      { label: 'Behang', to: '/behang' },
+      { label: 'Spuitwerk', to: '/spuitwerk' },
+      { label: 'Glaszetten', to: '/glaszetten' },
+      { label: 'Houtrot herstel', to: '/houtrot-herstel' },
+    ],
+  },
+  {
+    heading: 'Bedrijf',
+    links: [
+      { label: 'Over ons', to: '/over-ons' },
+      { label: 'Contact', to: '/contact' },
+      { label: 'Portofolio', to: '/portofolio' },
+    ],
+  },
+]
 
 export function SiteFooter() {
   return (
@@ -22,13 +38,13 @@ export function SiteFooter() {
           </p>
         </div>
 
-        {Object.entries(footerLinks).map(([heading, links]) => (
-          <div key={heading} className="footer-col">
-            <h4 className="footer-col-heading">{heading}</h4>
+        {footerLinks.map((group) => (
+          <div key={group.heading} className="footer-col">
+            <h4 className="footer-col-heading">{group.heading}</h4>
             <ul className="footer-col-list">
-              {links.map((link) => (
-                <li key={link}>
-                  <span>{link}</span>
+              {group.links.map((link) => (
+                <li key={link.to}>
+                  <NavLink to={link.to}>{link.label}</NavLink>
                 </li>
               ))}
             </ul>

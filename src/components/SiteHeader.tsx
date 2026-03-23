@@ -4,10 +4,10 @@ import { Button } from './ui'
 
 const navItems = [
   { to: '/', label: 'Home', end: true },
-  { to: '/glaszetten', label: 'Glaszetten', end: false },
   { to: '/schilderwerken', label: 'Schilderwerken', end: false },
   { to: '/behang', label: 'Behang', end: false },
   { to: '/spuitwerk', label: 'Spuitwerk', end: false },
+  { to: '/glaszetten', label: 'Glaszetten', end: false },
   { to: '/houtrot-herstel', label: 'Houtrot herstel', end: false },
 ]
 

@@ -1,16 +1,14 @@
-import { useState } from 'react'
 import overOnsImage from '../assets/site-images/002_assets.cdn.filesafe.space_qJoLB1VO30IJs12kbIbf_media_69a7fe48b701fe501c8408fc.jpg'
 import { BottomCtaSection } from '../components/BottomCtaSection'
 import { HomeHeroSection } from '../components/HomeHeroSection'
 import { Section } from '../components/Section'
-import { Button, Card } from '../components/ui'
-import { faqs, reviews, services } from '../data/siteContent'
+import { Button, Card, GalleryImage } from '../components/ui'
+import { reviews, services } from '../data/siteContent'
 
 const cardAccents = ['pink', 'cyan', 'navy', 'orange', 'pink', 'cyan'] as const
+const workSkeletons = ['work-carousel-item--lg', 'work-carousel-item--md', 'work-carousel-item--sm', 'work-carousel-item--md', 'work-carousel-item--lg'] as const
 
 export function HomePage() {
-  const [openFaq, setOpenFaq] = useState(0)
-
   return (
     <>
       <HomeHeroSection />
@@ -22,7 +20,7 @@ export function HomePage() {
         variant="white"
       >
         <div className="about-split">
-          <img
+          <GalleryImage
             src={overOnsImage}
             alt="Schilder in uitvoering bij een Buunk project"
             className="about-image"
@@ -59,25 +57,24 @@ export function HomePage() {
         </div>
       </Section>
 
-      {/* ── FAQ ── */}
-      <Section eyebrow="FAQ" title="Veelgestelde vragen" variant="white">
-        <div className="faq-list">
-          {faqs.map((item, index) => {
-            const isOpen = openFaq === index
-            return (
-              <button
-                key={item.q}
-                className={`faq-item${isOpen ? ' faq-item--open' : ''}`}
-                onClick={() => setOpenFaq(isOpen ? -1 : index)}
-              >
-                <div className="faq-question">
-                  <span>{item.q}</span>
-                  <span className="faq-chevron">{isOpen ? '▲' : '▼'}</span>
-                </div>
-                {isOpen && <div className="faq-answer">{item.a}</div>}
-              </button>
-            )
-          })}
+      {/* ── Bekijk ons werk ── */}
+      <Section eyebrow="Portfolio" title="Bekijk ons werk" variant="white" align="center">
+        <div className="work-showcase">
+          <div className="work-carousel">
+            <div className="work-carousel-track">
+              {[...workSkeletons, ...workSkeletons].map((itemClass, index) => (
+                <GalleryImage
+                  key={`${itemClass}-${index}`}
+                  alt={`Portfolio voorbeeld ${index + 1}`}
+                  forceSkeleton
+                  className={`work-carousel-item ${itemClass}`}
+                />
+              ))}
+            </div>
+          </div>
+          <Button to="/portofolio" variant="primary" size="md" className="work-showcase-btn">
+            Bekijk het portfolio
+          </Button>
         </div>
       </Section>
 
@@ -85,7 +82,10 @@ export function HomePage() {
       <Section eyebrow="Klantbeoordelingen" title="Wat klanten over ons zeggen" variant="cyan-wash" align="center">
         <div className="review-grid">
           {reviews.map((review) => (
-            <blockquote key={review} className="review-card">{review}</blockquote>
+            <blockquote key={review} className="review-card">
+              <p className="review-card-text">{review.replace(/^★+\s*/, '')}</p>
+              <div className="review-stars" aria-label="5 van 5 sterren">★★★★★</div>
+            </blockquote>
           ))}
         </div>
       </Section>
